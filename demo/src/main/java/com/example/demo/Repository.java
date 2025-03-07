@@ -1,12 +1,7 @@
 package com.example.demo;
 
-public class Repository {
+public interface Repository {
 
-    public Repository(Configuracion config){
-    }
-
-    public void save() {
-        System.out.println("Save");
-    }
+    void guardar();
 
 }

@@ -1,15 +1,7 @@
 package com.example.demo;
 
-public class Service {
-    private Repository repository;
+public interface Service {
 
-    public Service(Repository repository) {
-        this.repository = repository;
-    }
-
-    public void save() {
-        repository.save();
-    }
-
+    void guardar();
 
 }
