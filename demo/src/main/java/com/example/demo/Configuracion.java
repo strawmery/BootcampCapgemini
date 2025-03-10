@@ -8,4 +8,8 @@ public class Configuracion {
         System.out.println("Configuracion created");
     }
 
+    public void init() {
+		System.err.println("Configuracion inicializada");
+	}
+
 }
