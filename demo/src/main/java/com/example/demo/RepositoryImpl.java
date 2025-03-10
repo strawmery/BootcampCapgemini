@@ -1,16 +1,16 @@
 package com.example.demo;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
-@RepositoryImpl
-public class RepositoryImpl implements Repository {	
-
-    public RepositoryImpl(Configuracion config){
-    }
-
-    @Override
-    public void save() {
-        System.out.println("RepositoryImpl.save()");
-    }
-
+//@Repository
+//@Qualifier("verdad")
+public class RepositorioImpl implements Repositorio {
+	public RepositorioImpl(Configuracion config, Registro registro) {
+		// TODO Auto-generated constructor stub
+	}
+	@Override
+	public void guardar() {
+		System.err.println("Guardando");
+	}
 }
