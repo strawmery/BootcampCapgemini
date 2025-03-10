@@ -1,6 +1,6 @@
 package com.example.demo;
 
-public interface Service {
+public interface Services {
 
     void guardar();
 
