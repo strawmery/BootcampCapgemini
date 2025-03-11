@@ -35,7 +35,6 @@ class GildedRose {
             item.quality++;
         }else{
             item.quality = 50;
-            throw new IllegalArgumentException("Quality cannot be more than 50");
         }
     }
 
@@ -44,7 +43,6 @@ class GildedRose {
             item.quality--;
         }else{
             item.quality = 0;
-            throw new IllegalArgumentException("Quality cannot be negative");
         }
     }
 
