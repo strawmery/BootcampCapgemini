@@ -13,12 +13,12 @@ public class DemoApplication implements CommandLineRunner {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
-	@Autowired
-	Services service;
+	// @Autowired
+	// Services service;
 
 	@Override
 	public void run(String... args) throws Exception {
-		service.guardar();
+		// service.guardar();
 	}
 
 	@Bean
