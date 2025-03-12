@@ -1,6 +1,8 @@
 package com.example.demo.exampleTest;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -119,6 +121,28 @@ class CalculatorTest {
 					assertEquals("/ by zero", ex.getMessage());
 				}
 			}
+		}
+	}
+
+	@Nested
+	@DisplayName("Mockeo")
+	class Mockeo {
+		@Test
+		void sumaMock(){
+			var calc = new Calculator();
+			when(calc.suma(anyInt(), anyInt())).thenReturn(3); 
+
+			var actual = calc.suma(2, 3);
+			assertEquals(3, actual);
+		}
+
+		@Test
+		void divisionMock(){
+			var calc = new Calculator();
+			when(calc.divide(anyInt(), anyInt())).thenReturn(3); 
+
+			var actual = calc.divide(2, 3);
+			assertEquals(3, actual);
 		}
 	}
 }
