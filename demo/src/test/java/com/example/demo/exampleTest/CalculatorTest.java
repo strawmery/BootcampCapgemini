@@ -2,6 +2,9 @@ package com.example.demo.exampleTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.AfterAll;
@@ -12,6 +15,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import com.example.demo.Repository;
 import com.example.demo.example.Calculator;
 
 class CalculatorTest {
@@ -144,5 +148,21 @@ class CalculatorTest {
 			var actual = calc.divide(2, 3);
 			assertEquals(3, actual);
 		}
+
+	// 	@Test
+	// 	void repoMock(){
+	// 		var calc = mock(Calculator.class);
+	// 		when(calc.suma(anyInt(), anyInt())).thenReturn(3);
+	// 		var repo = mock(Repository.class);
+	// 		doNothing().when(repo).guardar();
+			
+	// 		var obj = new Factura(calc, repo);
+	// 		var actual = obj.calcularTotal(2, 3);
+	// 		obj.emitir();
+
+	// 		assertEquals(2, 3);
+	// 		verify(calc).suma(2, 2);
+	// 		verify(repo).guardar();
+	// 	}
 	}
 }
