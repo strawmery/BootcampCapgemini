@@ -7,9 +7,9 @@ import org.springframework.dao.DuplicateKeyException;
 
 import cap.maria.catalogo.Exceptions.InvalidDataException;
 
-public interface DomainService <E, K>{
+public interface DomainService<E, K>{
     List<E> getall();
-    Optional <E> getOne(K id);
+    Optional <E> getOne(Integer id);
     
     E add(E item) throws DuplicateKeyException, InvalidDataException;
 
