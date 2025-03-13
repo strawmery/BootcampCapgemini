@@ -25,8 +25,17 @@ public class ProyectoApplication implements CommandLineRunner{
 	private ActorRepository dao;
 
 	private void exampleData(){
-		var actor = new Actor(0,"zendaya", "ejemplo");
-		dao.save(actor);
+		// var actor = new Actor(0,"zendaya", "ejemplo");
+		// dao.save(actor);
+		var item = dao.findById(204);
+		if(item.isPresent()){
+			var actor = item.get();
+			actor.setFirstName("Zendaya");
+			actor.setLastName(actor.getLastName().toUpperCase());
+			dao.save(actor);
+		}else{
+			System.out.println("actor not found");
+		}
 		dao.findAll().forEach(System.out::println);
 	}
 
