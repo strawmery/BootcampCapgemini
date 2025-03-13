@@ -37,6 +37,8 @@ public class ProyectoApplication implements CommandLineRunner{
 			System.out.println("actor not found");
 		}
 		dao.findAll().forEach(System.out::println);
+		dao.deleteById(204);
+		dao.findAll().forEach(System.out::println);
 	}
 
 }
