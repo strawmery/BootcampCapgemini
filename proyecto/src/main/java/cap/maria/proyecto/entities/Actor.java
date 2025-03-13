@@ -2,6 +2,10 @@ package cap.maria.proyecto.Entities;
 
 import java.io.Serializable;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -35,6 +39,18 @@ public class Actor implements Serializable {
 	private List<FilmActor> filmActors;
 
 	public Actor() {
+	}
+
+	public Actor(int actorId, String firstName, String lastName) {
+		super();
+		this.actorId = actorId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+
+	public Actor(int actorId) {
+		super();
+		this.actorId = actorId;
 	}
 
 	public int getActorId() {
