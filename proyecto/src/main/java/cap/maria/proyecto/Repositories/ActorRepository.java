@@ -1,5 +1,9 @@
 package cap.maria.proyecto.Repositories;
 
-public interface ActorRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import cap.maria.proyecto.Entities.Actor;
+
+public interface ActorRepository extends JpaRepository <Actor, Integer>{
 
 }
