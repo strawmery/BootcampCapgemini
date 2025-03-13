@@ -91,4 +91,7 @@ public class Actor implements Serializable {
 		return filmActor;
 	}
 
+	public String toString() {
+		return "Actor [actorId=" + actorId + ", firstName=" + firstName + ", lastName=" + lastName + ", lastUpdate=" + lastUpdate + "]";
+	}
 }
