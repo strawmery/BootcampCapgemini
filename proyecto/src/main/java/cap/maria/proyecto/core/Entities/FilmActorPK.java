@@ -1,24 +1,30 @@
-package cap.maria.proyecto.Entities;
+package cap.maria.proyecto.core.Entities;
 
 import java.io.Serializable;
 import jakarta.persistence.*;
 
 /**
- * The primary key class for the film_category database table.
+ * The primary key class for the film_actor database table.
  * 
  */
 @Embeddable
-public class FilmCategoryPK implements Serializable {
+public class FilmActorPK implements Serializable {
 	//default serial version id, required for serializable classes.
 	private static final long serialVersionUID = 1L;
+
+	@Column(name="actor_id", insertable=false, updatable=false, unique=true, nullable=false)
+	private int actorId;
 
 	@Column(name="film_id", insertable=false, updatable=false, unique=true, nullable=false)
 	private int filmId;
 
-	@Column(name="category_id", insertable=false, updatable=false, unique=true, nullable=false)
-	private byte categoryId;
-
-	public FilmCategoryPK() {
+	public FilmActorPK() {
+	}
+	public int getActorId() {
+		return this.actorId;
+	}
+	public void setActorId(int actorId) {
+		this.actorId = actorId;
 	}
 	public int getFilmId() {
 		return this.filmId;
@@ -26,31 +32,25 @@ public class FilmCategoryPK implements Serializable {
 	public void setFilmId(int filmId) {
 		this.filmId = filmId;
 	}
-	public byte getCategoryId() {
-		return this.categoryId;
-	}
-	public void setCategoryId(byte categoryId) {
-		this.categoryId = categoryId;
-	}
 
 	public boolean equals(Object other) {
 		if (this == other) {
 			return true;
 		}
-		if (!(other instanceof FilmCategoryPK)) {
+		if (!(other instanceof FilmActorPK)) {
 			return false;
 		}
-		FilmCategoryPK castOther = (FilmCategoryPK)other;
+		FilmActorPK castOther = (FilmActorPK)other;
 		return 
-			(this.filmId == castOther.filmId)
-			&& (this.categoryId == castOther.categoryId);
+			(this.actorId == castOther.actorId)
+			&& (this.filmId == castOther.filmId);
 	}
 
 	public int hashCode() {
 		final int prime = 31;
 		int hash = 17;
+		hash = hash * prime + this.actorId;
 		hash = hash * prime + this.filmId;
-		hash = hash * prime + ((int) this.categoryId);
 		
 		return hash;
 	}

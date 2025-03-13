@@ -5,8 +5,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import cap.maria.proyecto.Entities.Actor;
-import cap.maria.proyecto.Repositories.ActorRepository;
+import cap.maria.proyecto.contracts.repositories.ActorRepository;
+import cap.maria.proyecto.core.Entities.Actor;
 
 @SpringBootApplication
 public class ProyectoApplication implements CommandLineRunner{
@@ -27,7 +27,7 @@ public class ProyectoApplication implements CommandLineRunner{
 	private void exampleData(){
 		// var actor = new Actor(0,"zendaya", "ejemplo");
 		// dao.save(actor);
-		var item = dao.findById(204);
+		var item = dao.findById(201);
 		if(item.isPresent()){
 			var actor = item.get();
 			actor.setFirstName("Zendaya");
@@ -37,7 +37,7 @@ public class ProyectoApplication implements CommandLineRunner{
 			System.out.println("actor not found");
 		}
 		dao.findAll().forEach(System.out::println);
-		dao.deleteById(204);
+		dao.deleteById(203);
 		dao.findAll().forEach(System.out::println);
 	}
 
