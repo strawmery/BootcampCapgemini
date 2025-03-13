@@ -1,4 +1,4 @@
-package cap.maria.proyecto.entities;
+package cap.maria.proyecto.Entities;
 
 import java.io.Serializable;
 import jakarta.persistence.*;

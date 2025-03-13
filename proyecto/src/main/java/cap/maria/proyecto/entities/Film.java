@@ -1,4 +1,4 @@
-package cap.maria.proyecto.entities;
+package cap.maria.proyecto.Entities;
 
 import java.io.Serializable;
 import jakarta.persistence.*;
@@ -59,15 +59,15 @@ public class Film implements Serializable {
 	private Language languageVO;
 
 	//bi-directional many-to-one association to FilmActor
-	@OneToMany(mappedBy="film")
+	@OneToMany(mappedBy="film", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<FilmActor> filmActors;
 
 	//bi-directional many-to-one association to FilmCategory
-	@OneToMany(mappedBy="film")
+	@OneToMany(mappedBy="film", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<FilmCategory> filmCategories;
 
 	//bi-directional many-to-one association to Inventory
-	@OneToMany(mappedBy="film")
+	@OneToMany(mappedBy="film", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Inventory> inventories;
 
 	public Film() {
