@@ -40,20 +40,31 @@ public class ActorServiceImpl implements ActorService {
 
     @Override
     public Actor update(Actor item) throws DuplicateKeyException, InvalidDataException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        if(item.getFirstName() == null || item.getLastName() == null) {
+            throw new InvalidDataException();
+        }if (!repo.existsById(item.getActorId())) {
+            throw new DuplicateKeyException("Actor does not exist");
+        } else {
+            return repo.save(item);
+        }
     }
 
     @Override
     public void delete(Actor item) throws InvalidDataException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        if(!repo.existsById(item.getActorId())){
+            throw new InvalidDataException("Actor does not exist");
+        }else{
+            repo.delete(item);
+        }
     }
 
     @Override
     public void deleteById(Integer id) throws InvalidDataException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'deleteById'");
+        if(!repo.existsById(id)){
+            throw new InvalidDataException("Actor does not exist");
+        }else{
+            repo.deleteById(id);
+        }
     }
 
 }
