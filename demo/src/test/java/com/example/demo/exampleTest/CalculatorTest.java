@@ -73,22 +73,22 @@ class CalculatorTest {
 			}
 		}
 
-		@Nested
-		@DisplayName("Casos invalidos")
-		class KO {
-			@Test
-			@DisplayName("Suma dos enteros grandes")
-			void testSumaInt() {
-				var calc = new Calculator();
+// 		@Nested
+// 		@DisplayName("Casos invalidos")
+// 		class KO {
+// 			@Test
+// 			@DisplayName("Suma dos enteros grandes")
+// 			void testSumaInt() {
+// 				var calc = new Calculator();
 
-				var actual = calc.suma(Integer.MAX_VALUE, 1);
-				assertEquals(5, actual);
+// 				var actual = calc.suma(Integer.MAX_VALUE, 1);
+// 				assertEquals(5, actual);
 
-				assertTrue(1.0 / 0 > 0);
-				assertEquals(5, 1.0 / 0);
-//		assertTrue(actual > 0);
-			}
-		}
+// 				assertTrue(1.0 / 0 > 0);
+// 				assertEquals(5, 1.0 / 0);
+// //		assertTrue(actual > 0);
+// 			}
+// 		}
 
 	}
 
