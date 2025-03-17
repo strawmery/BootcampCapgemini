@@ -2,7 +2,10 @@ package cap.maria.catalogo.Entities;
 
 import java.io.Serializable;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
@@ -14,6 +17,9 @@ import java.util.List;
  * The persistent class for the actor database table.
  * 
  */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name="actor")
 @NamedQuery(name="Actor.findAll", query="SELECT a FROM Actor a")
@@ -25,9 +31,13 @@ public class Actor implements Serializable {
 	@Column(name="actor_id", unique=true, nullable=false)
 	private int actorId;
 
+	@NotNull(message = "First name cannot be null")
+	@Size(min = 1, max = 45, message = "Fisrt name must be between 1 and 45 characters")
 	@Column(name="first_name", nullable=false, length=45)
 	private String firstName;
 
+	@NotNull(message = "Last name cannot be null")
+	@Size(min = 1, max = 45, message = "Last name must be between 1 and 45 characters")
 	@Column(name="last_name", nullable=false, length=45)
 	private String lastName;
 
@@ -38,59 +48,11 @@ public class Actor implements Serializable {
 	@OneToMany(mappedBy="actor")
 	private List<FilmActor> filmActors;
 
-	public Actor() {
-	}
-
 	public Actor(int actorId, String firstName, String lastName) {
 		super();
 		this.actorId = actorId;
 		this.firstName = firstName;
 		this.lastName = lastName;
-	}
-
-	public Actor(int actorId) {
-		super();
-		this.actorId = actorId;
-	}
-
-	public int getActorId() {
-		return this.actorId;
-	}
-
-	public void setActorId(int actorId) {
-		this.actorId = actorId;
-	}
-
-	public String getFirstName() {
-		return this.firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return this.lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public Timestamp getLastUpdate() {
-		return this.lastUpdate;
-	}
-
-	public void setLastUpdate(Timestamp lastUpdate) {
-		this.lastUpdate = lastUpdate;
-	}
-
-	public List<FilmActor> getFilmActors() {
-		return this.filmActors;
-	}
-
-	public void setFilmActors(List<FilmActor> filmActors) {
-		this.filmActors = filmActors;
 	}
 
 	public FilmActor addFilmActor(FilmActor filmActor) {
@@ -105,9 +67,5 @@ public class Actor implements Serializable {
 		filmActor.setActor(null);
 
 		return filmActor;
-	}
-
-	public String toString() {
-		return "Actor [actorId=" + actorId + ", firstName=" + firstName + ", lastName=" + lastName + ", lastUpdate=" + lastUpdate + "]";
 	}
 }
