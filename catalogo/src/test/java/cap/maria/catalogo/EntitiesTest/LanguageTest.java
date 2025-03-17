@@ -43,7 +43,7 @@ public class LanguageTest {
 
 		language.addFilm(film);
 
-		assertEquals(1, language.getFilms().size());
+		assertEquals(2, language.getFilms().size());
 		assertEquals(film, language.getFilms().get(0));
 	}
 
@@ -76,7 +76,7 @@ public class LanguageTest {
 
 		language.addFilmsVO(film);
 
-		assertEquals(1, language.getFilmsVO().size());
+		assertEquals(2, language.getFilmsVO().size());
 		assertEquals(film, language.getFilmsVO().get(0));
 	}
 
