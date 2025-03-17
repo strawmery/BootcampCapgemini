@@ -2,11 +2,17 @@ package cap.maria.catalogo.Entities;
 
 import java.io.Serializable;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * The primary key class for the film_category database table.
  * 
  */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Embeddable
 public class FilmCategoryPK implements Serializable {
 	//default serial version id, required for serializable classes.
@@ -17,21 +23,6 @@ public class FilmCategoryPK implements Serializable {
 
 	@Column(name="category_id", insertable=false, updatable=false, unique=true, nullable=false)
 	private byte categoryId;
-
-	public FilmCategoryPK() {
-	}
-	public int getFilmId() {
-		return this.filmId;
-	}
-	public void setFilmId(int filmId) {
-		this.filmId = filmId;
-	}
-	public byte getCategoryId() {
-		return this.categoryId;
-	}
-	public void setCategoryId(int categoryId) {
-		this.categoryId = (byte) categoryId;
-	}
 
 	public boolean equals(Object other) {
 		if (this == other) {

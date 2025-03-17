@@ -2,11 +2,17 @@ package cap.maria.catalogo.Entities;
 
 import java.io.Serializable;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * The primary key class for the film_actor database table.
  * 
  */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Embeddable
 public class FilmActorPK implements Serializable {
 	//default serial version id, required for serializable classes.
@@ -17,34 +23,6 @@ public class FilmActorPK implements Serializable {
 
 	@Column(name="film_id", insertable=false, updatable=false, unique=true, nullable=false)
 	private int filmId;
-
-	public FilmActorPK() {
-	}
-	public int getActorId() {
-		return this.actorId;
-	}
-	public void setActorId(int actorId) {
-		this.actorId = actorId;
-	}
-	public int getFilmId() {
-		return this.filmId;
-	}
-	public void setFilmId(int filmId) {
-		this.filmId = filmId;
-	}
-
-	public boolean equals(Object other) {
-		if (this == other) {
-			return true;
-		}
-		if (!(other instanceof FilmActorPK)) {
-			return false;
-		}
-		FilmActorPK castOther = (FilmActorPK)other;
-		return 
-			(this.actorId == castOther.actorId)
-			&& (this.filmId == castOther.filmId);
-	}
 
 	public int hashCode() {
 		final int prime = 31;

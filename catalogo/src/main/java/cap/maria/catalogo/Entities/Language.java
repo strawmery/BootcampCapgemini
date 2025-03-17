@@ -2,6 +2,12 @@ package cap.maria.catalogo.Entities;
 
 import java.io.Serializable;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -10,6 +16,9 @@ import java.util.List;
  * The persistent class for the language database table.
  * 
  */
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name="language")
 @NamedQuery(name="Language.findAll", query="SELECT l FROM Language l")
@@ -24,6 +33,8 @@ public class Language implements Serializable {
 	@Column(name="last_update", insertable=false, updatable=false, nullable=false)
 	private Timestamp lastUpdate;
 
+	@NotNull(message = "Name cannot be null")
+	@Size(min = 1, max = 20, message = "Name must be between 1 and 20 characters")
 	@Column(nullable=false, length=20)
 	private String name;
 
@@ -34,41 +45,6 @@ public class Language implements Serializable {
 	//bi-directional many-to-one association to Film
 	@OneToMany(mappedBy="languageVO")
 	private List<Film> filmsVO;
-
-	public Language() {
-	}
-
-	public int getLanguageId() {
-		return this.languageId;
-	}
-
-	public void setLanguageId(int languageId) {
-		this.languageId = languageId;
-	}
-
-	public Timestamp getLastUpdate() {
-		return this.lastUpdate;
-	}
-
-	public void setLastUpdate(Timestamp lastUpdate) {
-		this.lastUpdate = lastUpdate;
-	}
-
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public List<Film> getFilms() {
-		return this.films;
-	}
-
-	public void setFilms(List<Film> films) {
-		this.films = films;
-	}
 
 	public Film addFilm(Film film) {
 		getFilms().add(film);

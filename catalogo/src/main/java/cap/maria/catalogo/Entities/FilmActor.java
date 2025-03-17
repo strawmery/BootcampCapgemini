@@ -2,6 +2,10 @@ package cap.maria.catalogo.Entities;
 
 import java.io.Serializable;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.sql.Timestamp;
 
 
@@ -9,6 +13,9 @@ import java.sql.Timestamp;
  * The persistent class for the film_actor database table.
  * 
  */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name="film_actor")
 @NamedQuery(name="FilmActor.findAll", query="SELECT f FROM FilmActor f")
@@ -30,40 +37,5 @@ public class FilmActor implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="film_id", nullable=false, insertable=false, updatable=false)
 	private Film film;
-
-	public FilmActor() {
-	}
-
-	public FilmActorPK getId() {
-		return this.id;
-	}
-
-	public void setId(FilmActorPK id) {
-		this.id = id;
-	}
-
-	public Timestamp getLastUpdate() {
-		return this.lastUpdate;
-	}
-
-	public void setLastUpdate(Timestamp lastUpdate) {
-		this.lastUpdate = lastUpdate;
-	}
-
-	public Actor getActor() {
-		return this.actor;
-	}
-
-	public void setActor(Actor actor) {
-		this.actor = actor;
-	}
-
-	public Film getFilm() {
-		return this.film;
-	}
-
-	public void setFilm(Film film) {
-		this.film = film;
-	}
 
 }

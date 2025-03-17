@@ -2,6 +2,12 @@ package cap.maria.catalogo.Entities;
 
 import java.io.Serializable;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -10,6 +16,9 @@ import java.util.List;
  * The persistent class for the category database table.
  * 
  */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name="category")
 @NamedQuery(name="Category.findAll", query="SELECT c FROM Category c")
@@ -24,39 +33,14 @@ public class Category implements Serializable {
 	@Column(name="last_update", insertable=false, updatable=false, nullable=false)
 	private Timestamp lastUpdate;
 
+	@NotNull(message = "Name cannot be null")
+	@Size(min = 1, max = 25, message = "Name must be between 1 and 25 characters")
 	@Column(nullable=false, length=25)
 	private String name;
 
 	//bi-directional many-to-one association to FilmCategory
 	@OneToMany(mappedBy="category")
 	private List<FilmCategory> filmCategories;
-
-	public Category() {
-	}
-
-	public int getCategoryId() {
-		return this.categoryId;
-	}
-
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
-	}
-
-	public Timestamp getLastUpdate() {
-		return this.lastUpdate;
-	}
-
-	public void setLastUpdate(Timestamp lastUpdate) {
-		this.lastUpdate = lastUpdate;
-	}
-
-	public String getName() {
-		return this.name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
 
 	public List<FilmCategory> getFilmCategories() {
 		return this.filmCategories;
