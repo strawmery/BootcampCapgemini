@@ -29,8 +29,8 @@ public class FilmCategoryPK implements Serializable {
 	public byte getCategoryId() {
 		return this.categoryId;
 	}
-	public void setCategoryId(byte categoryId) {
-		this.categoryId = categoryId;
+	public void setCategoryId(int categoryId) {
+		this.categoryId = (byte) categoryId;
 	}
 
 	public boolean equals(Object other) {
