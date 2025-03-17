@@ -15,7 +15,7 @@ public class FilmCategoryTest {
 	@Test
 	void createFilmCategory() {
 		FilmCategoryPK id = new FilmCategoryPK();
-		id.setCategoryId(1);
+		id.setCategoryId((byte) 1);
 		id.setFilmId(2);
 
 		Category category = new Category();
@@ -43,7 +43,7 @@ public class FilmCategoryTest {
 	@Test
 	void testSettersAndGetters() {
 		FilmCategoryPK id = new FilmCategoryPK();
-		id.setCategoryId(1);
+		id.setCategoryId((byte) 1);
 		id.setFilmId(2);
 
 		Category category = new Category();
@@ -69,11 +69,11 @@ public class FilmCategoryTest {
 	@Test
 	void testNotEquals() {
 		FilmCategoryPK id1 = new FilmCategoryPK();
-		id1.setCategoryId(1);
+		id1.setCategoryId((byte) 1);
 		id1.setFilmId(2);
 
 		FilmCategoryPK id2 = new FilmCategoryPK();
-		id2.setCategoryId(2);
+		id2.setCategoryId((byte) 2);
 		id2.setFilmId(3);
 
 		Category category1 = new Category();

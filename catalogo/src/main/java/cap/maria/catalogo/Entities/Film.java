@@ -78,6 +78,20 @@ public class Film implements Serializable {
 	@OneToMany(mappedBy="film", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<FilmCategory> filmCategories;
 
+	public FilmActor addFilmActor(FilmActor filmActor) {
+		getFilmActors().add(filmActor);
+		filmActor.setFilm(this);
+
+		return filmActor;
+	}
+
+	public FilmActor removeFilmActor(FilmActor filmActor) {
+		getFilmActors().remove(filmActor);
+		filmActor.setFilm(null);
+
+		return filmActor;
+	}
+
 	public FilmCategory addFilmCategory(FilmCategory filmCategory) {
 		getFilmCategories().add(filmCategory);
 		filmCategory.setFilm(this);

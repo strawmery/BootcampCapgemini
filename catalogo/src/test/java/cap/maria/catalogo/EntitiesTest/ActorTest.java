@@ -75,7 +75,7 @@ public class ActorTest {
 		actor.setLastName("Doe");
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		actor.setLastUpdate(timestamp);
-		String expected = "Actor [actorId=1, firstName=John, lastName=Doe, lastUpdate=" + timestamp + "]";
+		String expected = "Actor(actorId=1, firstName=John, lastName=Doe, lastUpdate=" + timestamp + ", filmActors=null)";
 		assertEquals(expected, actor.toString());
 	}
 }
