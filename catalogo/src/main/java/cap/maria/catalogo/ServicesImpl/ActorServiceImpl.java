@@ -1,4 +1,4 @@
-package cap.maria.catalogo.Services;
+package cap.maria.catalogo.ServicesImpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import cap.maria.catalogo.Entities.Actor;
 import cap.maria.catalogo.Exceptions.InvalidDataException;
 import cap.maria.catalogo.Repositories.ActorRepository;
+import cap.maria.catalogo.Services.ActorService;
 
 @Service
 public class ActorServiceImpl implements ActorService {

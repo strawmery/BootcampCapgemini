@@ -14,7 +14,8 @@ import org.springframework.dao.DuplicateKeyException;
 import cap.maria.catalogo.Entities.Actor;
 import cap.maria.catalogo.Exceptions.InvalidDataException;
 import cap.maria.catalogo.Repositories.ActorRepository;
-import cap.maria.catalogo.Services.ActorServiceImpl;
+import cap.maria.catalogo.ServicesImpl.ActorServiceImpl;
+
 public class ActorServiceImplTest {
 
     @Mock

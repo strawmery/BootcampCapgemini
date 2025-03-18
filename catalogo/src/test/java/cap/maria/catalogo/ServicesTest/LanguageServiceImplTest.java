@@ -19,7 +19,7 @@ import org.springframework.dao.DuplicateKeyException;
 import cap.maria.catalogo.Entities.Language;
 import cap.maria.catalogo.Exceptions.InvalidDataException;
 import cap.maria.catalogo.Repositories.LanguageRepository;
-import cap.maria.catalogo.Services.LanguageServiceImpl;
+import cap.maria.catalogo.ServicesImpl.LanguageServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
 public class LanguageServiceImplTest {

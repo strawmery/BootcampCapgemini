@@ -1,4 +1,4 @@
-package cap.maria.catalogo.Services;
+package cap.maria.catalogo.ServicesImpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,6 +8,7 @@ import org.springframework.dao.DuplicateKeyException;
 import cap.maria.catalogo.Entities.Film;
 import cap.maria.catalogo.Exceptions.InvalidDataException;
 import cap.maria.catalogo.Repositories.FilmRepository;
+import cap.maria.catalogo.Services.FilmService;
 
 public class FilmServiceImpl implements FilmService{
 

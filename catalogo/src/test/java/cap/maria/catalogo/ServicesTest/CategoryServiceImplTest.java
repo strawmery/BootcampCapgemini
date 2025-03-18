@@ -15,7 +15,7 @@ import org.springframework.dao.DuplicateKeyException;
 import cap.maria.catalogo.Entities.Category;
 import cap.maria.catalogo.Exceptions.InvalidDataException;
 import cap.maria.catalogo.Repositories.CategoryRepository;
-import cap.maria.catalogo.Services.CategoryServiceImpl;
+import cap.maria.catalogo.ServicesImpl.CategoryServiceImpl;
 
 public class CategoryServiceImplTest {
 

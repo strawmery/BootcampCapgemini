@@ -15,7 +15,7 @@ import org.springframework.dao.DuplicateKeyException;
 import cap.maria.catalogo.Entities.Film;
 import cap.maria.catalogo.Exceptions.InvalidDataException;
 import cap.maria.catalogo.Repositories.FilmRepository;
-import cap.maria.catalogo.Services.FilmServiceImpl;
+import cap.maria.catalogo.ServicesImpl.FilmServiceImpl;
 
 
 

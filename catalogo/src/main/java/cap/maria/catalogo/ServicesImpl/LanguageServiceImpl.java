@@ -1,4 +1,4 @@
-package cap.maria.catalogo.Services;
+package cap.maria.catalogo.ServicesImpl;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,6 +8,7 @@ import org.springframework.dao.DuplicateKeyException;
 import cap.maria.catalogo.Entities.Language;
 import cap.maria.catalogo.Exceptions.InvalidDataException;
 import cap.maria.catalogo.Repositories.LanguageRepository;
+import cap.maria.catalogo.Services.LanguageService;
 
 public class LanguageServiceImpl implements LanguageService {
 
