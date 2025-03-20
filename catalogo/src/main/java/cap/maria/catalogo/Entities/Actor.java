@@ -11,6 +11,9 @@ import lombok.NoArgsConstructor;
 import java.sql.Timestamp;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * The persistent class for the actor database table.
@@ -44,6 +47,7 @@ public class Actor implements Serializable {
 	private Timestamp lastUpdate;
 
 	@OneToMany(mappedBy="actor")
+	@JsonBackReference
 	private List<FilmActor> filmActors;
 
 	public Actor(int actorId, String firstName, String lastName) {

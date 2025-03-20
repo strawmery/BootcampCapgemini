@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import cap.maria.catalogo.Entities.Actor;
@@ -14,9 +17,9 @@ import cap.maria.catalogo.Services.ActorService;
 @Service
 public class ActorServiceImpl implements ActorService {
 
-    private ActorRepository repo;
+    private final ActorRepository repo;
 
-    public void setRepo(ActorRepository repo) {
+    public ActorServiceImpl(ActorRepository repo) {
         this.repo = repo;
     }
 
@@ -68,6 +71,11 @@ public class ActorServiceImpl implements ActorService {
         }else{
             repo.deleteById(id);
         }
+    }
+
+    @Override
+    public Page<Actor> getAll(Pageable pageable) {
+        return repo.findAll(pageable);
     }
 
 }
