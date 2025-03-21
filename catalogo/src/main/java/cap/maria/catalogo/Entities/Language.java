@@ -11,6 +11,8 @@ import lombok.NoArgsConstructor;
 import java.sql.Timestamp;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * The persistent class for the language database table.
@@ -31,6 +33,7 @@ public class Language implements Serializable {
 	private int languageId;
 
 	@Column(name="last_update", insertable=false, updatable=false, nullable=false)
+	@JsonIgnore
 	private Timestamp lastUpdate;
 
 	@NotNull(message = "Name cannot be null")
@@ -39,11 +42,13 @@ public class Language implements Serializable {
 	private String name;
 
 	//bi-directional many-to-one association to Film
-	@OneToMany(mappedBy="language")
+	@OneToMany(mappedBy="language", fetch = FetchType.LAZY)
+	@JsonIgnore
 	private List<Film> films;
 
 	//bi-directional many-to-one association to Film
-	@OneToMany(mappedBy="languageVO")
+	@OneToMany(mappedBy="languageVO", fetch = FetchType.LAZY)
+	@JsonIgnore
 	private List<Film> filmsVO;
 
 	public Film addFilm(Film film) {

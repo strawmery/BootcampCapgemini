@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import cap.maria.catalogo.Entities.Film;
 import cap.maria.catalogo.Exceptions.InvalidDataException;
@@ -66,6 +68,11 @@ public class FilmServiceImpl implements FilmService{
         }else{
             repo.deleteById(id);
         }
+    }
+
+        @Override
+    public Page<Film> getAll(Pageable pageable) {
+        return repo.findAll(pageable);
     }
 
 }

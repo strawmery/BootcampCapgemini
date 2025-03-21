@@ -6,18 +6,19 @@ import java.util.Optional;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
-import cap.maria.catalogo.Entities.Actor;
 import cap.maria.catalogo.Entities.Language;
 import cap.maria.catalogo.Exceptions.InvalidDataException;
 import cap.maria.catalogo.Repositories.LanguageRepository;
 import cap.maria.catalogo.Services.LanguageService;
 
+@Service
 public class LanguageServiceImpl implements LanguageService {
 
     private LanguageRepository repo;
 
-    public void setRepo(LanguageRepository repo) {
+    public LanguageServiceImpl(LanguageRepository repo) {
         this.repo = repo;
     }
 
