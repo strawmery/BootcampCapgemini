@@ -4,7 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
+import cap.maria.catalogo.Entities.Actor;
 import cap.maria.catalogo.Entities.Language;
 import cap.maria.catalogo.Exceptions.InvalidDataException;
 import cap.maria.catalogo.Repositories.LanguageRepository;
@@ -66,6 +69,11 @@ public class LanguageServiceImpl implements LanguageService {
         }else{
             repo.deleteById(id);
         }
+    }
+
+    @Override
+    public Page<Language> getAll(Pageable pageable) {
+        return repo.findAll(pageable);
     }
 
 }
