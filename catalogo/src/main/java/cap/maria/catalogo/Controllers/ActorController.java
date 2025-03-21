@@ -1,6 +1,7 @@
 package cap.maria.catalogo.Controllers;
 
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import cap.maria.catalogo.Entities.Actor;
@@ -11,7 +12,6 @@ import cap.maria.catalogo.Exceptions.InvalidDataException;
 import cap.maria.catalogo.Exceptions.NotFoundException;
 import cap.maria.catalogo.ServicesImpl.ActorServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 
@@ -23,6 +23,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,11 +31,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 
 @RestController
+@RequestMapping("/actores/v1")
 public class ActorController {
 
     private ActorServiceImpl service;
@@ -44,7 +48,7 @@ public class ActorController {
     }
 
 
-    @GetMapping("/actors/v1")
+    @GetMapping
     @Operation(summary = "obtienes todos los actores")
     public List<Actor> getAllActors() {
 
@@ -52,34 +56,35 @@ public class ActorController {
         
     }
 
-    @GetMapping("/actors/v1/{id}")
+    @GetMapping("{id}")
     @Operation(summary = "obtienes actor por id")
-    public Optional<Actor> getActorById(@RequestParam Integer id) {
+    public ActorDTO getActorById(@RequestParam Integer id) {
 
-        return service.getOne(id);
+        return ActorDTO.from(service.getOne(id).get()); 
         
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void update(@PathVariable int id, @Valid @RequestBody ActorDTO item) throws BadRequestException, NotFoundException, InvalidDataException {
+	public void update(@PathVariable int id,@RequestBody ActorDTO item, WebRequest request) throws BadRequestException, NotFoundException, InvalidDataException {
 		if (item.getActorId() != id) {
 			throw new BadRequestException("El id del actor no coincide con el recurso a modificar");
 		}
 		service.update(ActorDTO.from(item));
 	}
 
-    @PostMapping("/actor/new/v1")
-    @ApiResponse(responseCode = "201", description = "actor creado")
-    public ResponseEntity<Object> create(@Valid @RequestBody ActorDTO item) throws BadRequestException, DuplicateKeyException, InvalidDataException{
+    @PostMapping
+    @ApiResponse(responseCode = "201", description = "Entity created")
+    @Operation(description = "Create a new entity")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Object> create( @RequestBody ActorDTO item) throws BadRequestException, DuplicateKeyException, InvalidDataException {
+        
         var newItem = service.add(ActorDTO.from(item));
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newItem.getActorId()).toUri();
-
         return ResponseEntity.created(location).build();
-
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable int id) throws InvalidDataException{
         service.deleteById(id);
