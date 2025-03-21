@@ -4,12 +4,16 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import cap.maria.catalogo.Entities.Category;
 import cap.maria.catalogo.Exceptions.InvalidDataException;
 import cap.maria.catalogo.Repositories.CategoryRepository;
 import cap.maria.catalogo.Services.CategoryService;
 
+@Service
 public class CategoryServiceImpl implements CategoryService {
 
      private CategoryRepository repo;
@@ -66,6 +70,11 @@ public class CategoryServiceImpl implements CategoryService {
         }else{
             repo.deleteById(id);
         }
+    }
+
+    @Override
+    public Page<Category> getAll(Pageable pageable) {
+        return repo.findAll(pageable);
     }
 
 }

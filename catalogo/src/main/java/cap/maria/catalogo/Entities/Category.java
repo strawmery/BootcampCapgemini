@@ -1,4 +1,4 @@
-package cap.maria.catalogo.Entities;
+ package cap.maria.catalogo.Entities;
 
 import java.io.Serializable;
 import jakarta.persistence.*;
@@ -10,6 +10,8 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 /**
@@ -40,7 +42,13 @@ public class Category implements Serializable {
 
 	//bi-directional many-to-one association to FilmCategory
 	@OneToMany(mappedBy="category")
+	@JsonBackReference
 	private List<FilmCategory> filmCategories;
+
+	public Category(int id, String name){
+		this.categoryId = id;
+		this.name = name;	
+	}
 
 	public List<FilmCategory> getFilmCategories() {
 		return this.filmCategories;
