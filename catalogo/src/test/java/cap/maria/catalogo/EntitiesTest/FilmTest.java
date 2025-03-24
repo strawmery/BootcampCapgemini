@@ -2,7 +2,7 @@ package cap.maria.catalogo.EntitiesTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,7 +35,7 @@ public class FilmTest {
 
 	@Test
 	public void testGetAndSetLastUpdate() {
-		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		Date timestamp = new Date(System.currentTimeMillis());
 		film.setLastUpdate(timestamp);
 		assertEquals(timestamp, film.getLastUpdate());
 	}

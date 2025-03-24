@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 // import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -40,7 +40,7 @@ public class Actor implements Serializable {
 
 	@Column(name="last_update", insertable=false, updatable=false, nullable=false)
 	@JsonIgnore
-	private Timestamp lastUpdate;
+	private Date lastUpdate;
 
 	@OneToMany(mappedBy="actor", fetch = FetchType.LAZY)
 	@JsonIgnore

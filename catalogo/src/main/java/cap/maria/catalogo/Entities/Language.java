@@ -8,7 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -34,7 +34,7 @@ public class Language implements Serializable {
 
 	@Column(name="last_update", insertable=false, updatable=false, nullable=false)
 	@JsonIgnore
-	private Timestamp lastUpdate;
+	private Date lastUpdate;
 
 	@NotNull(message = "Name cannot be null")
 	@Size(min = 1, max = 20, message = "Name must be between 1 and 20 characters")

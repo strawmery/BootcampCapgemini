@@ -1,7 +1,7 @@
 package cap.maria.catalogo.EntitiesTest;
 
 import static org.junit.jupiter.api.Assertions.*;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,9 +27,9 @@ public class CategoryTest {
 
 	@Test
 	public void testGetAndSetLastUpdate() {
-		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-		category.setLastUpdate(timestamp);
-		assertEquals(timestamp, category.getLastUpdate());
+		Date date = new Date(System.currentTimeMillis());
+		category.setLastUpdate(date);
+		assertEquals(date, category.getLastUpdate());
 	}
 
 	@Test

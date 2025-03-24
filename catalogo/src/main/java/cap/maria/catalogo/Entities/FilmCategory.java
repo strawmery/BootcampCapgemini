@@ -1,12 +1,13 @@
 package cap.maria.catalogo.Entities;
 
 import java.io.Serializable;
+import java.util.Date;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Timestamp;
 
 
 /**
@@ -26,7 +27,7 @@ public class FilmCategory implements Serializable {
 	private FilmCategoryPK id;
 
 	@Column(name="last_update", insertable=false, updatable=false, nullable=false)
-	private Timestamp lastUpdate;
+	private Date lastUpdate;
 
 	//bi-directional many-to-one association to Category
 	@ManyToOne

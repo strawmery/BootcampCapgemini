@@ -3,7 +3,7 @@ package cap.maria.catalogo.EntitiesTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -23,7 +23,7 @@ public class LanguageTest {
 		Language language = new Language();
 		language.setLanguageId(1);
 		language.setName("English");
-		language.setLastUpdate(new Timestamp(System.currentTimeMillis()));
+		language.setLastUpdate(new Date(System.currentTimeMillis()));
 
 		assertEquals(1, language.getLanguageId());
 		assertEquals("English", language.getName());

@@ -3,7 +3,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import java.sql.Timestamp;
+import java.util.Date;
 import org.junit.jupiter.api.Test;
 import cap.maria.catalogo.Entities.Category;
 import cap.maria.catalogo.Entities.Film;
@@ -30,7 +30,7 @@ public class FilmCategoryTest {
 		filmCategory.setId(id);
 		filmCategory.setCategory(category);
 		filmCategory.setFilm(film);
-		filmCategory.setLastUpdate(new Timestamp(System.currentTimeMillis()));
+		filmCategory.setLastUpdate(new Date(System.currentTimeMillis()));
 
 		assertNotNull(filmCategory);
 		assertAll("Constructor",
@@ -58,7 +58,7 @@ public class FilmCategoryTest {
 		filmCategory.setId(id);
 		filmCategory.setCategory(category);
 		filmCategory.setFilm(film);
-		filmCategory.setLastUpdate(new Timestamp(System.currentTimeMillis()));
+		filmCategory.setLastUpdate(new Date(System.currentTimeMillis()));
 
 		assertEquals(id, filmCategory.getId());
 		assertEquals(category, filmCategory.getCategory());
@@ -96,13 +96,13 @@ public class FilmCategoryTest {
 		filmCategory1.setId(id1);
 		filmCategory1.setCategory(category1);
 		filmCategory1.setFilm(film1);
-		filmCategory1.setLastUpdate(new Timestamp(System.currentTimeMillis()));
+		filmCategory1.setLastUpdate(new Date(System.currentTimeMillis()));
 
 		FilmCategory filmCategory2 = new FilmCategory();
 		filmCategory2.setId(id2);
 		filmCategory2.setCategory(category2);
 		filmCategory2.setFilm(film2);
-		filmCategory2.setLastUpdate(new Timestamp(System.currentTimeMillis()));
+		filmCategory2.setLastUpdate(new Date(System.currentTimeMillis()));
 
 		assertNotEquals(filmCategory1, filmCategory2);
 	}

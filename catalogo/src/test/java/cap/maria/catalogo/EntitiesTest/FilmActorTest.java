@@ -1,7 +1,7 @@
 package cap.maria.catalogo.EntitiesTest;
 
 import static org.junit.jupiter.api.Assertions.*;
-import java.sql.Timestamp;
+import java.util.Date;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import cap.maria.catalogo.Entities.Actor;
@@ -27,9 +27,9 @@ public class FilmActorTest {
 
 	@Test
 	public void testGetAndSetLastUpdate() {
-		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-		filmActor.setLastUpdate(timestamp);
-		assertEquals(timestamp, filmActor.getLastUpdate());
+		Date date = new Date(System.currentTimeMillis());
+		filmActor.setLastUpdate(date);
+		assertEquals(date, filmActor.getLastUpdate());
 	}
 
 	@Test
