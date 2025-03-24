@@ -23,13 +23,4 @@ public class FilmActorPK implements Serializable {
 
 	@Column(name="film_id", insertable=false, updatable=false, unique=true, nullable=false)
 	private int filmId;
-
-	public int hashCode() {
-		final int prime = 31;
-		int hash = 17;
-		hash = hash * prime + this.actorId;
-		hash = hash * prime + this.filmId;
-		
-		return hash;
-	}
 }

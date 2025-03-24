@@ -1,9 +1,6 @@
 package cap.maria.catalogo.Entities.Dtos;
 
-
-
 import cap.maria.catalogo.Entities.Category;
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

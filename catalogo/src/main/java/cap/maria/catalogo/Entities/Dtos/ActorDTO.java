@@ -1,6 +1,6 @@
 package cap.maria.catalogo.Entities.Dtos;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+// import com.fasterxml.jackson.annotation.JsonProperty;
 
 import cap.maria.catalogo.Entities.Actor;
 import io.swagger.v3.oas.annotations.media.Schema;

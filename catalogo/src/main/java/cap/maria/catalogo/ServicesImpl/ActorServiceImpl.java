@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import cap.maria.catalogo.Entities.Actor;
