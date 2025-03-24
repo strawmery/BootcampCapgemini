@@ -24,6 +24,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import cap.maria.catalogo.Entities.Film;
 import cap.maria.catalogo.Entities.Dtos.FilmDTO;
+import cap.maria.catalogo.Entities.Dtos.FilmRequestDTO;
 import cap.maria.catalogo.Exceptions.BadRequestException;
 import cap.maria.catalogo.Exceptions.DuplicateKeyException;
 import cap.maria.catalogo.Exceptions.InvalidDataException;
@@ -43,7 +44,7 @@ public class FilmController {
     }
 
     @GetMapping
-    @Operation(summary = "obtienes todos los idiomas")
+    @Operation(summary = "obtienes todos las peliculas")
     public List<Film> getAllFilms() {
 
         return srv.getall();
@@ -71,9 +72,9 @@ public class FilmController {
     @ApiResponse(responseCode = "201", description = "Entity created")
     @Operation(description = "Create a new entity")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Object> create( @RequestBody FilmDTO item) throws BadRequestException, DuplicateKeyException, InvalidDataException {
+    public ResponseEntity<Object> create( @RequestBody FilmRequestDTO item) throws BadRequestException, DuplicateKeyException, InvalidDataException {
         
-        var newItem = srv.add(FilmDTO.from(item));
+        var newItem = srv.add(FilmRequestDTO.from(item));
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newItem.getFilmId()).toUri();
         return ResponseEntity.created(location).build();
     }

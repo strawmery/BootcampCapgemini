@@ -10,21 +10,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class FilmDTO {
+@AllArgsConstructor
+public class FilmRequestDTO {
 
-    private int filmId;
     private String title;
     private short releaseYear;
-    private int languageId;
+    private Integer languageId;
     private int rentalDuration;
     private BigDecimal rentalRate;
     private BigDecimal cost;
 
-    public static FilmDTO from(Film source) {
-        return new FilmDTO(
-            source.getFilmId(),
+    public static FilmRequestDTO from(Film source) {
+        return new FilmRequestDTO(
             source.getTitle(),
             source.getReleaseYear(),
             Optional.ofNullable(source.getLanguage()).map(Language::getLanguageId).orElse(0),
@@ -34,20 +32,21 @@ public class FilmDTO {
         );
     }
 
-    public static Film from(FilmDTO dto){
+    public static Film from(FilmRequestDTO dto){
         Film film = new Film();
-        film.setFilmId(dto.getFilmId());
         film.setTitle(dto.getTitle());
-        film.setReleaseYear(dto.releaseYear);
+        film.setReleaseYear(dto.getReleaseYear());
         film.setRentalDuration((byte) dto.getRentalDuration());
         film.setRentalRate(dto.getRentalRate());
         film.setReplacementCost(dto.getCost());
 
-        Language language = new Language();
-        language.setLanguageId(dto.getLanguageId());
-        film.setLanguage(language);
+        if(dto.getLanguageId() != null && dto.getLanguageId() > 0){
+            Language language = new Language();
+            language.setLanguageId(dto.getLanguageId());
+            film.setLanguage(language);
+        }
+        
 
         return film;
     }
-
 }

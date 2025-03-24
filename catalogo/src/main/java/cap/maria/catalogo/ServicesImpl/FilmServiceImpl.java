@@ -6,17 +6,20 @@ import java.util.Optional;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import cap.maria.catalogo.Entities.Film;
 import cap.maria.catalogo.Exceptions.InvalidDataException;
 import cap.maria.catalogo.Repositories.FilmRepository;
 import cap.maria.catalogo.Services.FilmService;
 
+
+@Service
 public class FilmServiceImpl implements FilmService{
 
     private FilmRepository repo;
 
-    public void setRepo(FilmRepository repo){
+    public FilmServiceImpl(FilmRepository repo){
         this.repo = repo;
     }
 
@@ -34,11 +37,8 @@ public class FilmServiceImpl implements FilmService{
     public Film add(Film item) throws DuplicateKeyException, InvalidDataException {
         if(item.getTitle() == null || item.getReleaseYear() == null) {
             throw new InvalidDataException();
-        }if (repo.existsById(item.getFilmId())) {
-            throw new DuplicateKeyException("Film already exists");
-        } else {
-            return repo.save(item);
         }
+            return repo.save(item);
     }
 
     @Override
