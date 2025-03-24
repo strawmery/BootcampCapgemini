@@ -61,20 +61,20 @@ public class FilmController {
 
     @PutMapping("{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void update(@PathVariable int id,@RequestBody Film item, WebRequest request) throws BadRequestException, NotFoundException, InvalidDataException {
+	public void update(@PathVariable int id,@RequestBody FilmDTO item, WebRequest request) throws BadRequestException, NotFoundException, InvalidDataException {
 		if (item.getFilmId() != id) {
 			throw new BadRequestException("El id del idioma no coincide con el recurso a modificar");
 		}
-		srv.update(item);
+		srv.update(FilmDTO.from(item));
 	}
 
     @PostMapping
     @ApiResponse(responseCode = "201", description = "Entity created")
     @Operation(description = "Create a new entity")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Object> create( @RequestBody Film item) throws BadRequestException, DuplicateKeyException, InvalidDataException {
+    public ResponseEntity<Object> create( @RequestBody FilmDTO item) throws BadRequestException, DuplicateKeyException, InvalidDataException {
         
-        var newItem = srv.add(item);
+        var newItem = srv.add(FilmDTO.from(item));
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newItem.getFilmId()).toUri();
         return ResponseEntity.created(location).build();
     }

@@ -78,6 +78,19 @@ public class Film implements Serializable {
 	@OneToMany(mappedBy="film", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<FilmCategory> filmCategories;
 
+	
+
+	public Film(int filmId, byte rentalDuration, BigDecimal rentalRate, BigDecimal replacementCost,
+			@Size(min = 1, max = 128, message = "Title must be between 1 and 128 characters") String title,
+			Language language) {
+		this.filmId = filmId;
+		this.rentalDuration = rentalDuration;
+		this.rentalRate = rentalRate;
+		this.replacementCost = replacementCost;
+		this.title = title;
+		this.language = language;
+	}
+
 	public FilmActor addFilmActor(FilmActor filmActor) {
 		getFilmActors().add(filmActor);
 		filmActor.setFilm(this);
