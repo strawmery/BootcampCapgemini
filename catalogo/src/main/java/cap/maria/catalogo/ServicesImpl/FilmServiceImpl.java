@@ -75,4 +75,15 @@ public class FilmServiceImpl implements FilmService{
         return repo.findAll(pageable);
     }
 
+        @Override
+        public List<Film> getFilterFilms(String type, String value) {
+        return switch(type.toLowerCase()){
+            case "title" -> repo.findByTitleContainingIgnoreCase(value);
+            case "actor" -> repo.findByFilmActors_Actor_FirstNameContainingIgnoreCaseOrFilmActors_Actor_LastNameContainingIgnoreCase(value, value);
+            case "category" -> repo.findByFilmCategories_Category_NameIgnoreCase(value);
+            case "language" -> repo.findByLanguage_NameIgnoreCase(value);
+            default -> throw new IllegalArgumentException("invalid filter"+type);
+        };
+       }
+
 }

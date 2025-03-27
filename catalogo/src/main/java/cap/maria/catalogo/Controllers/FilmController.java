@@ -92,4 +92,9 @@ public class FilmController {
         return srv.getAll(pageable);
     }
 
+    @GetMapping("/search")
+    public List<Film> getFilms(@RequestParam String type, @RequestParam String value) {
+        return srv.getFilterFilms(type, value);
+    }
+
 }
