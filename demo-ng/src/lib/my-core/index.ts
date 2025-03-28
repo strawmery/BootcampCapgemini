@@ -1,1 +1,1 @@
-export {MyCoreModule} from './my-core.module';
+export * from './my-core.module';
