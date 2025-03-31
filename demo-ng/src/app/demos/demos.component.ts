@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, computed, OnDestroy, OnInit, signal, ɵINPUT_SIGNAL_BRAND_WRITE_TYPE } from '@angular/core';
 import { NotificationService, NotificationType } from '../common-services';
 import { Unsubscribable } from 'rxjs';
 
@@ -9,10 +9,46 @@ import { Unsubscribable } from 'rxjs';
   styleUrl: './demos.component.css'
 })
 export class DemosComponent implements OnInit, OnDestroy{
+  private fecha = new Date('2025-03-31');
+  public readonly nombre = signal<string>('mundo')
+  public readonly fontSize = signal<number>(24)
+  public readonly listado = signal([
+    {id:1, nombre: 'maria'},
+    {id:2, nombre: 'adrian'},
+    {id:3, nombre: 'oscar'},
+    {id:4, nombre: 'luna'}
+  ])
+  public readonly idNombre = signal<number>(2)
+
+  public resultado = signal<string>('')
+  public visible = signal<boolean>(true)
+  public invisible = computed<boolean>(() => !this.visible())
+  public readonly estetica = signal({importante: true, urgente: true, error : false})
 
   private suscriptor: Unsubscribable | undefined;
   
   constructor(public vm: NotificationService) { }
+
+  public get Fecha() : string { return this.fecha.toISOString(); }
+  public set Fecha( value: Date){
+    this.fecha = new Date(value)
+  }
+
+  saluda() {
+    this.resultado.set('Hola ${this.nombre()}');
+  }
+
+  despide() {
+    this.resultado.set('Adios ${this.nombre()}');
+  }
+
+  dice(algo: string ) {
+    this.resultado.set('Dice ${algo}');
+  }
+
+  cambia( ) {
+    this.resultado.update(valor => valor )
+  }
 
   ngOnInit(): void {
     this.suscriptor = this.vm.Notificacion.subscribe(n => {

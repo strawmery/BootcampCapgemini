@@ -1,9 +1,12 @@
-<p>
-    <input type="button" value="Error" (click)="vm.add('Esto es una notificación de error')" >
-    <input type="button" value="Warn" (click)="vm.add('Esta notificación es un aviso', 
-    vm.NotificationType.warn)" >
-    <input type="button" value="Info" (click)="vm.add('Solo una notificación informativa', 
-    vm.NotificationType.info)" >
-    <input type="button" value="Log" (click)="vm.add('Para trazar con notificaciones', 
-    vm.NotificationType.log)" >
+<h1 class="tittle">Grafic dessign is my passion </h1>
+
+<p class="notification-buttons">
+    <button class="error" (click)="vm.add('Esto es una notificación de error')">Error</button>
+    <button class="warn" (click)="vm.add('Esta notificación es un aviso', vm.NotificationType.warn)">Warn</button>
+    <button class="info" (click)="vm.add('Solo una notificación informativa', vm.NotificationType.info)">Info</button>
+    <button class="log" (click)="vm.add('Para trazar con notificaciones', vm.NotificationType.log)">Log</button>
 </p>
+
+<p class="resu">Resultado: {{resultado()}}</p>
+
+<p>Fecha: {{Fecha}}</p>
