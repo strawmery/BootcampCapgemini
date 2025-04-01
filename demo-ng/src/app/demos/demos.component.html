@@ -1,12 +1,50 @@
 <h1 class="tittle">Grafic dessign is my passion </h1>
 
 <p class="notification-buttons">
+    <input type="text" [(ngModel)]="nombre" placeholder="Escribe tu nombre"/>
+    <input type="button" value="saludar" (click)="saluda()"/>
+    <input type="button" value="despide" (click)="despide()"/>
+    <input type="button" value="dice" (click)="dice('algo')"/>
+    <input type="button" value="cambia" (click)="cambia()"/>
+
     <button class="error" (click)="vm.add('Esto es una notificación de error')">Error</button>
     <button class="warn" (click)="vm.add('Esta notificación es un aviso', vm.NotificationType.warn)">Warn</button>
     <button class="info" (click)="vm.add('Solo una notificación informativa', vm.NotificationType.info)">Info</button>
     <button class="log" (click)="vm.add('Para trazar con notificaciones', vm.NotificationType.log)">Log</button>
 </p>
 
-<p class="resu">Resultado: {{resultado()}}</p>
+<p [textContent]="resultado()">esto se pierde</p>
+<p [innerHTML]="resultado()">esto se pierde</p>
+<p [hidden]="!visible()">ahora me ves</p>
+<p [hidden]="invisible()">ahora me ves</p>
+<p *ngIf="visible()">ahora existo con directiva</p>
+@if(visible()){
+    <p>ahora existo con flujo</p>
+}
+<p [ngClass]="estetica">Lorem ipsum dolor sit amet consectetur adipisicing elit.
+    Pariatur eius autem impedit maiores cupiditate accusamus officia laudantium quod suscipit
+    rerum perferendis nam possimus odio praesentium animi culpa, libero voluptatibus voluptatem.
+</p>
 
+<p [class.semivisible]="invisible()">Ahora me ves bien</p>
+<p>Calcula: 2 + 2 = {{2 + 2}} = {{ calcula(2, 2) }}</p>
+<p class="resu">Resultado: {{resultado()}}</p>
 <p>Fecha: {{Fecha}}</p>
+<ul>
+@for(item of listado(); track item.id ) {
+  <li [style.background-color]="$odd ? 'LightBlue' : 'Lavender'">
+    {{item.nombre}} ({{item.id}}) [Elemento {{$index + 1}} de {{listado().length}}]
+  </li>
+}
+</ul>
+
+<p>
+  <select [(ngModel)]="idNombre">
+    @for(item of listado(); track item.id ) {
+      <option [value]="item.id" >{{item.nombre}}</option>>
+    }
+  </select>
+  Seleccionado: {{idNombre()}}
+  <input type="text" value="Tabarnia" #txtProvincia >
+  <input type="button" value="Añadir" (click)="add(txtProvincia.value)" />
+</p>
