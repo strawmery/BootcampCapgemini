@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { NotificationService } from '../common-services';
 import { LoggerService } from '@my/core';
 import { ContactosDAOService } from './contactos.dao.service';
+import { Router } from '@angular/router';
 
 export type ModoCRUD = 'list' | 'add' | 'edit' | 'view' | 'delete';
 export const AUTH_REQUIRED = new HttpContextToken<boolean>(() => false);
@@ -10,17 +11,18 @@ export const AUTH_REQUIRED = new HttpContextToken<boolean>(() => false);
 @Injectable({
   providedIn: 'root',
 })
-
 export class ContactosViewModelService {
   protected modo: ModoCRUD = 'list';
   protected listado: Array<any> = [];
   protected elemento: any = {};
   protected idOriginal: any = null;
+  protected listURL = '/contactos';
 
   constructor(
     protected notify: NotificationService,
     protected out: LoggerService,
-    protected dao: ContactosDAOService
+    protected dao: ContactosDAOService,
+    protected router: Router
   ) {}
 
   public get Modo(): ModoCRUD {
@@ -31,6 +33,10 @@ export class ContactosViewModelService {
   }
   public get Elemento(): any {
     return this.elemento;
+  }
+
+  public auth = {
+    isAuthenticated: false
   }
 
   public list(): void {
@@ -77,9 +83,9 @@ export class ContactosViewModelService {
     });
   }
   public cancel(): void {
-    this.elemento = {};
-    this.idOriginal = null;
-    this.list();
+    this.clear();
+    // this.list();
+    this.router.navigateByUrl(this.listURL);
   }
   public send(): void {
     switch (this.modo) {
@@ -113,8 +119,8 @@ export class ContactosViewModelService {
         msg = err.message;
         break;
       case 404:
-        msg = `ERROR ${err.status}: ${err.statusText}`;
-        break;
+        this.router.navigateByUrl('/404.html');
+        return;
       default:
         msg = `ERROR ${err.status}: ${err.error?.['title'] ?? err.statusText}.${
           err.error?.['detail'] ? ` Detalles: ${err.error['detail']}` : ''

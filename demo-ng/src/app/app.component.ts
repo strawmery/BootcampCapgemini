@@ -5,10 +5,12 @@ import { NotificationComponent, NotificationModalComponent } from './main';
 import { NotificationService, NotificationType } from './common-services';
 import { FormulariosComponent } from './examples/formularios/formularios.component';
 import { ContactosComponent } from "./contactos/componente.component";
+import { HeaderComponent } from "./main/header/header.component";
+import { FooterComponent } from './main/footer/footer.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, FormulariosComponent, NotificationComponent, ContactosComponent],
+  imports: [RouterOutlet, FormulariosComponent, NotificationComponent, ContactosComponent, HeaderComponent, FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
