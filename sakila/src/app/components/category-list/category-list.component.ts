@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { CategoryService } from '../../services/category.service';
 
 @Component({
   selector: 'app-category-list',
-  imports: [],
+  standalone: true,
+  imports: [FormsModule, CommonModule],
   templateUrl: './category-list.component.html',
   styleUrl: './category-list.component.css'
 })

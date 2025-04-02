@@ -1,1 +1,30 @@
-<p>category-list works!</p>
+<h2>Categorías</h2>
+
+<!-- Formulario para crear nueva categoría -->
+<div>
+  <h3>Crear Nueva Categoría</h3>
+  <input type="text" [(ngModel)]="newCategory" placeholder="Nombre de la nueva categoría">
+  <button (click)="crearCategorias()">Crear</button>
+</div>
+
+<!-- Lista de categorías -->
+<ul>
+  <li *ngFor="let categoria of categorias">
+    {{ categoria.name }}
+    <button (click)="eliminarCategoria(categoria.categoryId)">Eliminar</button>
+    <button (click)="prepararEdicion(categoria)">Editar</button>
+  </li>
+</ul>
+
+<!-- Formulario para editar categoría -->
+<div *ngIf="categoriaParaEditar.id !== null">
+  <h3>Editar Categoría</h3>
+  <input type="text" [(ngModel)]="editCategory.name" placeholder="Nombre de la categoría">
+  <button (click)="actualizarCategoria()">Actualizar</button>
+  <button (click)="editCategory = { id: null, name: '' }">Cancelar</button>
+</div>
+
+<!-- Botones de paginación -->
+<button (click)="paginaAnterior()" [disabled]="page === 0">Anterior</button>
+<button (click)="paginaSiguiente()" [disabled]="page >= totalPages - 1">Siguiente</button>
+
