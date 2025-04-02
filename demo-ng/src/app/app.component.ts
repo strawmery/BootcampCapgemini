@@ -1,14 +1,13 @@
-import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { LoggerService } from '@my/core';
-import { NotificationComponent } from './main/notification/notification.component';
-import { DemosComponent } from './demos/demos.component';
-import { NotificationModalComponent } from './main';
+import { NotificationComponent, NotificationModalComponent } from './main';
+import { NotificationService, NotificationType } from './common-services';
+import { FormulariosComponent } from './examples/formularios/formularios.component';
 
 @Component({
   selector: 'app-root',
-  imports: [CommonModule, RouterOutlet, NotificationModalComponent, DemosComponent, NotificationComponent],
+  imports: [RouterOutlet, FormulariosComponent, NotificationComponent, /*NotificationModalComponent,*/ ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
