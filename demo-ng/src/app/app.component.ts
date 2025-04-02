@@ -4,10 +4,11 @@ import { LoggerService } from '@my/core';
 import { NotificationComponent, NotificationModalComponent } from './main';
 import { NotificationService, NotificationType } from './common-services';
 import { FormulariosComponent } from './examples/formularios/formularios.component';
+import { ContactosComponent } from "./contactos/componente.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, FormulariosComponent, NotificationComponent, /*NotificationModalComponent,*/ ],
+  imports: [RouterOutlet, FormulariosComponent, NotificationComponent, ContactosComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
