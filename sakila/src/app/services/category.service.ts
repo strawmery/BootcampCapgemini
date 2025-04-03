@@ -29,6 +29,11 @@ export class CategoryService {
   }
 
   actualizarCategoria(id: number, categoria: { name: string }): Observable<any> {
+    if (id === null || id === undefined) {
+      console.error("El ID de la categoría es inválido.");
+      return throwError(() => new Error("El ID es inválido."));
+    }
+  
     return this.http.put<any>(`${this.apiUrl}/${id}`, categoria).pipe(
       catchError((error) => {
         console.error('Error al actualizar la categoría', error);

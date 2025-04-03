@@ -8,18 +8,19 @@ import { CategoryService } from '../../services/category.service';
   standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './category-list.component.html',
-  styleUrl: './category-list.component.css'
+  styleUrl: './category-list.component.css',
 })
-export class CategoryListComponent implements OnInit{
-
+export class CategoryListComponent implements OnInit {
   categories: any[] = [];
   newCategory: string = '';
   page = 0;
   size = 5;
   totalPages = 1;
-  editCategory: any ={ id:null, name:''};
+  editCategory: any = { id: null, name: '' };
+  successMessage: string = '';
+  errorMessage: string = '';
 
-  constructor (private categoryService: CategoryService) {}
+  constructor(private categoryService: CategoryService) {}
 
   ngOnInit() {
     this.obtenerCategorias();
@@ -50,10 +51,10 @@ export class CategoryListComponent implements OnInit{
 
   crearCategorias() {
     if (!this.newCategory) {
-      console.error("El nombre de la categoría no puede estar vacío");
+      console.error('El nombre de la categoría no puede estar vacío');
       return;
     }
-  
+
     const categoria = { name: this.newCategory }; // Solo enviar el nombre
     this.categoryService.crearCategorias(categoria).subscribe(
       (data) => {
@@ -71,28 +72,32 @@ export class CategoryListComponent implements OnInit{
   }
 
   actualizarCategoria(): void {
+    console.log('Datos que se van a enviar: ', this.editCategory);
+
     if (!this.editCategory.name.trim()) {
       console.error('El nombre de la categoría no puede estar vacío');
       return;
     }
 
-    this.categoryService.actualizarCategoria(this.editCategory.id!, { name: this.editCategory.name }).subscribe({
-      next: (response) => {
-        console.log('Categoría actualizada correctamente');
-        this.editCategory = { id: null, name: '' };
-        this.obtenerCategorias();
-      },
-      error: (error) => {
-        console.error('Error al actualizar la categoría', error);
-      }
-    });
+    this.categoryService
+      .actualizarCategoria(this.editCategory.id!, this.editCategory)
+      .subscribe({
+        next: (response) => {
+          this.successMessage = 'Categoría actualizada con éxito!';
+          this.errorMessage = '';
+          this.editCategory = { id: null, name: '' };
+          this.obtenerCategorias();
+        },
+        error: (error) => {
+          this.successMessage = '';
+          this.errorMessage ='Hubo un problema al actualizar la categoría. Intenta nuevamente.';
+        },
+      });
   }
-  
 
   eliminarCategoria(id: number) {
     this.categoryService.eliminarCategoria(id).subscribe(() => {
       this.obtenerCategorias();
     });
   }
-
 }
