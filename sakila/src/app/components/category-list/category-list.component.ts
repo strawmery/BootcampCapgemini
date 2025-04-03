@@ -48,31 +48,50 @@ export class CategoryListComponent implements OnInit{
     }
   }
 
-  crearCategorias(){
-    if(this.newCategory.trim()){
-      this.categoryService.crearCategorias({name: this.newCategory}).subscribe(() => {
-        this.newCategory = '';
-        this.obtenerCategorias();
-      })
+  crearCategorias() {
+    if (!this.newCategory) {
+      console.error("El nombre de la categoría no puede estar vacío");
+      return;
     }
+  
+    const categoria = { name: this.newCategory }; // Solo enviar el nombre
+    this.categoryService.crearCategorias(categoria).subscribe(
+      (data) => {
+        console.log('Categoría creada con éxito:', data);
+        this.obtenerCategorias();
+      },
+      (error) => {
+        console.error('Error al crear categoría:', error);
+      }
+    );
   }
 
   prepararEdicion(category: any) {
     this.editCategory = { id: category.categoryId, name: category.name };
   }
 
-  actualizarCategoria() {
-    if (!this.editCategory.name.trim()) return;
-    this.categoryService.actualizarCategoria(this.editCategory.id, { name: this.editCategory.name }).subscribe(() => {
-      this.editCategory = { id: null, name: '' };
-      this.obtenerCategorias();
+  actualizarCategoria(): void {
+    if (!this.editCategory.name.trim()) {
+      console.error('El nombre de la categoría no puede estar vacío');
+      return;
+    }
+
+    this.categoryService.actualizarCategoria(this.editCategory.id!, { name: this.editCategory.name }).subscribe({
+      next: (response) => {
+        console.log('Categoría actualizada correctamente');
+        this.editCategory = { id: null, name: '' };
+        this.obtenerCategorias();
+      },
+      error: (error) => {
+        console.error('Error al actualizar la categoría', error);
+      }
     });
   }
   
 
   eliminarCategoria(id: number) {
     this.categoryService.eliminarCategoria(id).subscribe(() => {
-      this.obtenerCategorias(); // Recargar lista
+      this.obtenerCategorias();
     });
   }
 

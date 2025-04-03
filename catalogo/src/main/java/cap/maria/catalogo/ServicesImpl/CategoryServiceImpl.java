@@ -3,13 +3,14 @@ package cap.maria.catalogo.ServicesImpl;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import cap.maria.catalogo.Entities.Category;
+import cap.maria.catalogo.Exceptions.DuplicateKeyException;
 import cap.maria.catalogo.Exceptions.InvalidDataException;
+import cap.maria.catalogo.Exceptions.NotFoundException;
 import cap.maria.catalogo.Repositories.CategoryRepository;
 import cap.maria.catalogo.Services.CategoryService;
 
@@ -33,25 +34,36 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category add(Category item) throws DuplicateKeyException, InvalidDataException {
+    public Category add(Category item) throws InvalidDataException {
+        System.out.println("Nombre de la categoría recibido: " + item.getName());
+
         if(item.getName() == null) {
             throw new InvalidDataException();
-        }if (repo.existsById(item.getCategoryId())) {
-            throw new DuplicateKeyException("Category already exists");
         } else {
             return repo.save(item);
         }
     }
 
     @Override
-    public Category update(Category item) throws DuplicateKeyException, InvalidDataException {
-        if(item.getName() == null) {
-            throw new InvalidDataException();
-        }if (!repo.existsById(item.getCategoryId())) {
-            throw new DuplicateKeyException("Category does not exist");
-        } else {
-            return repo.save(item);
+    public Category update(Category item) throws InvalidDataException, NotFoundException{
+        Optional<Category> existingCategoryOpt = repo.findById(item.getCategoryId());
+        if (!existingCategoryOpt.isPresent()) {
+            throw new NotFoundException("Categoría no encontrada");
         }
+
+        Category existingCategory = existingCategoryOpt.get();
+        
+        if (!existingCategory.getName().equals(item.getName()) && repo.existsByName(item.getName())) {
+            throw new InvalidDataException("Ya existe una categoría con el mismo nombre");
+        }
+
+        if (item.getName() == null || item.getName().trim().isEmpty()) {
+            throw new InvalidDataException("El nombre de la categoría no puede estar vacío");
+        }
+
+        existingCategory.setName(item.getName());
+
+        return repo.save(existingCategory);
     }
 
     @Override

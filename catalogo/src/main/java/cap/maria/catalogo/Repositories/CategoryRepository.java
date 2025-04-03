@@ -6,4 +6,6 @@ import cap.maria.catalogo.Entities.Category;
 
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
+	boolean existsByName(String name);
+
 }

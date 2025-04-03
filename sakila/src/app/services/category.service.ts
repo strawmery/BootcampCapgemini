@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable, throwError } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -28,8 +28,13 @@ export class CategoryService {
     return this.http.post<any>(this.apiUrl, categoria);
   }
 
-  actualizarCategoria(id:number, categoria: {name: string}): Observable<any> {
-    return this.http.put<any>(`${this.apiUrl}/${id}`, categoria);
+  actualizarCategoria(id: number, categoria: { name: string }): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${id}`, categoria).pipe(
+      catchError((error) => {
+        console.error('Error al actualizar la categoría', error);
+        return throwError(() => error);
+      })
+    );
   }
 
   eliminarCategoria(id:number): Observable<any> {

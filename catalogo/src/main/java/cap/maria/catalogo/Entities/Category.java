@@ -30,7 +30,7 @@ public class Category implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="category_id", unique=true, nullable=false)
-	private int categoryId;
+	private Integer categoryId;
 
 	@Column(name="last_update", insertable=false, updatable=false, nullable=false)
 	private Date lastUpdate;
@@ -41,12 +41,16 @@ public class Category implements Serializable {
 	private String name;
 
 	//bi-directional many-to-one association to FilmCategory
-	@OneToMany(mappedBy="category")
+	@OneToMany(mappedBy="category", fetch = FetchType.LAZY)
 	@JsonBackReference
 	private List<FilmCategory> filmCategories;
 
 	public Category(int id, String name){
 		this.categoryId = id;
+		this.name = name;	
+	}
+
+	public Category(String name){
 		this.name = name;	
 	}
 

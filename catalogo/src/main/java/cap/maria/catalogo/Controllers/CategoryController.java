@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -24,13 +25,13 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import cap.maria.catalogo.Entities.Category;
 import cap.maria.catalogo.Entities.Dtos.CategoryDTO;
+import cap.maria.catalogo.Entities.Dtos.CategoryUpdateDTO;
 import cap.maria.catalogo.Exceptions.BadRequestException;
 import cap.maria.catalogo.Exceptions.DuplicateKeyException;
 import cap.maria.catalogo.Exceptions.InvalidDataException;
 import cap.maria.catalogo.Exceptions.NotFoundException;
 import cap.maria.catalogo.ServicesImpl.CategoryServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 
@@ -61,18 +62,22 @@ public class CategoryController {
         
     }
 
-    @PutMapping("{id}")
-	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void update(@PathVariable int id, @Valid @RequestBody CategoryDTO item) throws BadRequestException, NotFoundException, InvalidDataException {
-		if (item.getCategoryId() != id) {
-			throw new BadRequestException("El id del actor no coincide con el recurso a modificar");
-		}
-		srvc.update(CategoryDTO.from(item));
-	}
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void update(@PathVariable Integer id, @Valid @RequestBody CategoryUpdateDTO item) throws BadRequestException, NotFoundException, InvalidDataException {
+        if (item.getId() != null && !item.getId().equals(id)) {
+            throw new BadRequestException("El id del recurso no coincide");
+        }
 
+        Category category = new Category();
+        category.setCategoryId(id);;
+        category.setName(item.getName());
+
+        srvc.update(category);
+    }
     @PostMapping
     @ApiResponse(responseCode = "201", description = "actor creado")
-    public ResponseEntity<Object> create(@RequestBody CategoryDTO item) throws BadRequestException, DuplicateKeyException, InvalidDataException{
+    public ResponseEntity<Object> create(@Valid @RequestBody CategoryDTO item) throws BadRequestException, DuplicateKeyException, InvalidDataException{
         var newItem = srvc.add(CategoryDTO.from(item));
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newItem.getCategoryId()).toUri();
 

@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.dao.DuplicateKeyException;
 
 import cap.maria.catalogo.Exceptions.InvalidDataException;
+import cap.maria.catalogo.Exceptions.NotFoundException;
 
 public interface DomainService<E, K>{
     List<E> getall();
@@ -13,7 +14,7 @@ public interface DomainService<E, K>{
     
     E add(E item) throws DuplicateKeyException, InvalidDataException;
 
-    E update(E item) throws DuplicateKeyException, InvalidDataException;
+    E update(E item) throws DuplicateKeyException, InvalidDataException, NotFoundException;
 
     void delete(E item) throws InvalidDataException;
     void deleteById(K id) throws InvalidDataException;
