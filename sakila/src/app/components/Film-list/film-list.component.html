@@ -1,0 +1,41 @@
+<div class="container">
+    <!-- Título -->
+    <h2 class="title">Gestión de Películas</h2>
+  
+    <!-- Sección de Crear Película -->
+    <div class="create-film">
+      <h3>Crear Nueva Película</h3>
+      <input type="text" [(ngModel)]="newFilm.title" placeholder="Título de la nueva película" class="input-field" />
+      <input type="number" [(ngModel)]="newFilm.releaseYear" placeholder="Año de estreno" class="input-field" />
+      <input type="number" [(ngModel)]="newFilm.languageId" placeholder="ID del idioma" class="input-field" />
+      <input type="number" [(ngModel)]="newFilm.rentalDuration" placeholder="Duración del alquiler" class="input-field" />
+      <input type="number" [(ngModel)]="newFilm.rentalRate" placeholder="Tarifa de alquiler" class="input-field" />
+      <input type="number" [(ngModel)]="newFilm.cost" placeholder="Costo de reemplazo" class="input-field" />
+      <button (click)="agregarPelicula()" class="btn">Crear Película</button>
+    </div>
+  
+    <!-- Mostrar Películas -->
+    <div class="films-list">
+      <h3>Lista de Películas</h3>
+      <ul>
+        <li *ngFor="let film of Films" class="film-item">
+          <span class="film-title">{{ film.title }} ({{ film.releaseYear }})</span>
+          <button (click)="eliminarPelicula(film.filmId)" class="btn btn-danger">Eliminar</button>
+          <button (click)="prepararEdicion(film)" class="btn btn-edit">Editar</button>
+        </li>
+      </ul>
+    </div>
+  
+    <!-- Formulario para Editar Película -->
+    <div *ngIf="editFilm.filmId !== null" class="edit-film">
+      <h3>Editar Película</h3>
+      <input type="text" [(ngModel)]="editFilm.title" placeholder="Nuevo título de la película" class="input-field" />
+      <input type="number" [(ngModel)]="editFilm.releaseYear" placeholder="Nuevo año de estreno" class="input-field" />
+      <input type="number" [(ngModel)]="editFilm.languageId" placeholder="Nuevo ID del idioma" class="input-field" />
+      <input type="number" [(ngModel)]="editFilm.rentalDuration" placeholder="Nueva duración del alquiler" class="input-field" />
+      <input type="number" [(ngModel)]="editFilm.rentalRate" placeholder="Nueva tarifa de alquiler" class="input-field" />
+      <input type="number" [(ngModel)]="editFilm.cost" placeholder="Nuevo costo de reemplazo" class="input-field" />
+      <button (click)="actualizarPelicula()" class="btn btn-update">Actualizar</button>
+      <button (click)="editFilm = { filmId: 0, title: '', releaseYear: 0, languageId: 0, rentalDuration: 0, rentalRate: 0, cost: 0 }" class="btn btn-cancel">Cancelar</button>
+    </div>
+  

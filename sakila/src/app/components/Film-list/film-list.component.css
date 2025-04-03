@@ -1,0 +1,95 @@
+/* Contenedor principal */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+/* Título de la página */
+.title {
+    text-align: center;
+    color: #333;
+}
+
+/* Sección de Crear Película, Editar Película y Lista de Películas */
+.create-film,
+.edit-film,
+.films-list {
+    margin-bottom: 30px;
+}
+
+/* Campo de entrada (Input) */
+.input-field {
+    padding: 10px;
+    margin-right: 10px;
+    width: 70%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Botones comunes */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+/* Botones específicos */
+.btn-danger {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.btn-edit {
+    background-color: #f39c12;
+    color: white;
+}
+
+.btn-update {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.btn-cancel {
+    background-color: #95a5a6;
+    color: white;
+}
+
+/* Lista de Películas */
+.films-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.film-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #f8f8f8;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Nombre de la Película */
+.film-name {
+    font-size: 18px;
+}
+
+/* Paginación */
+.pagination {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.pagination .btn-pagination {
+    margin: 0 10px;
+}
