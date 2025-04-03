@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoryService {
  
-  private apiUrl = '${enviroment.apiUrl}/category/v1';
+  private apiUrl = `${environment.apiUrl}/category/v1`;
 
   constructor(private http: HttpClient) { }
 
@@ -20,7 +21,7 @@ export class CategoryService {
   }
 
   obtenerCategoriaPorId(id: number): Observable<any[]> {
-    return this.http.get<any>('${this.apiUrl}/${id}');
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
   }
 
   crearCategorias(categoria: {name:string}): Observable<any> {
@@ -28,10 +29,10 @@ export class CategoryService {
   }
 
   actualizarCategoria(id:number, categoria: {name: string}): Observable<any> {
-    return this.http.put<any>('${this.apiUrl}/${id}', categoria);
+    return this.http.put<any>(`${this.apiUrl}/${id}`, categoria);
   }
 
   eliminarCategoria(id:number): Observable<any> {
-    return this.http.delete<any>('${this.apiUrl}/${id');
+    return this.http.delete<any>(`${this.apiUrl}/${id}`);
   }
 }

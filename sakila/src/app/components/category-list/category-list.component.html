@@ -1,30 +1,38 @@
-<h2>Categorías</h2>
+<div class="container">
+  <!-- Título -->
+  <h2 class="title">Gestión de Categorías</h2>
 
-<!-- Formulario para crear nueva categoría -->
-<div>
-  <h3>Crear Nueva Categoría</h3>
-  <input type="text" [(ngModel)]="newCategory" placeholder="Nombre de la nueva categoría">
-  <button (click)="crearCategorias()">Crear</button>
+  <!-- Sección de Crear Categoría -->
+  <div class="create-category">
+    <h3>Crear Nueva Categoría</h3>
+    <input type="text" [(ngModel)]="newCategory" placeholder="Nombre de la nueva categoría" class="input-field" />
+    <button (click)="crearCategorias()" class="btn">Crear Categoría</button>
+  </div>
+
+  <!-- Mostrar Categorías -->
+  <div class="categories-list">
+    <h3>Lista de Categorías</h3>
+    <ul>
+      <li *ngFor="let categoria of categories" class="category-item">
+        <span class="category-name">{{ categoria.name }}</span>
+        <button (click)="eliminarCategoria(categoria.categoryId)" class="btn btn-danger">Eliminar</button>
+        <button (click)="prepararEdicion(categoria)" class="btn btn-edit">Editar</button>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Formulario para Editar Categoría -->
+  <div *ngIf="editCategory.id !== null" class="edit-category">
+    <h3>Editar Categoría</h3>
+    <input type="text" [(ngModel)]="editCategory.name" placeholder="Nuevo nombre de la categoría" class="input-field" />
+    <button (click)="actualizarCategoria()" class="btn btn-update">Actualizar</button>
+    <button (click)="editCategory = { id: null, name: '' }" class="btn btn-cancel">Cancelar</button>
+  </div>
+
+  <!-- Paginación -->
+  <div class="pagination">
+    <button (click)="paginaAnterior()" [disabled]="page === 0" class="btn btn-pagination">Anterior</button>
+    <button (click)="paginaSiguiente()" [disabled]="page >= totalPages - 1"
+      class="btn btn-pagination">Siguiente</button>
+  </div>
 </div>
-
-<!-- Lista de categorías -->
-<ul>
-  <li *ngFor="let categoria of categorias">
-    {{ categoria.name }}
-    <button (click)="eliminarCategoria(categoria.categoryId)">Eliminar</button>
-    <button (click)="prepararEdicion(categoria)">Editar</button>
-  </li>
-</ul>
-
-<!-- Formulario para editar categoría -->
-<div *ngIf="categoriaParaEditar.id !== null">
-  <h3>Editar Categoría</h3>
-  <input type="text" [(ngModel)]="editCategory.name" placeholder="Nombre de la categoría">
-  <button (click)="actualizarCategoria()">Actualizar</button>
-  <button (click)="editCategory = { id: null, name: '' }">Cancelar</button>
-</div>
-
-<!-- Botones de paginación -->
-<button (click)="paginaAnterior()" [disabled]="page === 0">Anterior</button>
-<button (click)="paginaSiguiente()" [disabled]="page >= totalPages - 1">Siguiente</button>
-

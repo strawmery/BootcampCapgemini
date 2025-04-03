@@ -12,11 +12,11 @@ import { CategoryService } from '../../services/category.service';
 })
 export class CategoryListComponent implements OnInit{
 
-  category: any[] = [];
+  categories: any[] = [];
   newCategory: string = '';
   page = 0;
   size = 5;
-  totalPages = 0;
+  totalPages = 1;
   editCategory: any ={ id:null, name:''};
 
   constructor (private categoryService: CategoryService) {}
@@ -26,10 +26,12 @@ export class CategoryListComponent implements OnInit{
   }
 
   obtenerCategorias() {
-    this.categoryService.obtenerCategoriasPaginadas(this.page, this.size).subscribe(data => {
-      this.category = data.content;
-      this.totalPages = data.totalPages;
-    });
+    this.categoryService.obtenerCategoriasPaginadas(this.page).subscribe(
+      (data: any) => {
+        this.categories = data;
+      },
+      (error) => console.error('Error obteniendo categorías:', error)
+    );
   }
 
   paginaAnterior() {
@@ -49,24 +51,22 @@ export class CategoryListComponent implements OnInit{
   crearCategorias(){
     if(this.newCategory.trim()){
       this.categoryService.crearCategorias({name: this.newCategory}).subscribe(() => {
-        this.obtenerCategorias();
         this.newCategory = '';
+        this.obtenerCategorias();
       })
     }
   }
 
-  prepararEdicion(categoria: any) {
-    this.editCategory = { id: categoria.categoryId, name: categoria.name };
+  prepararEdicion(category: any) {
+    this.editCategory = { id: category.categoryId, name: category.name };
   }
 
   actualizarCategoria() {
-    if (this.editCategory.name.trim()) {
-      this.categoryService.actualizarCategoria(this.editCategory.id, { name: this.editCategory.name })
-        .subscribe(() => {
-          this.obtenerCategorias();
-          this.editCategory = { id: null, name: '' };
-        });
-    }
+    if (!this.editCategory.name.trim()) return;
+    this.categoryService.actualizarCategoria(this.editCategory.id, { name: this.editCategory.name }).subscribe(() => {
+      this.editCategory = { id: null, name: '' };
+      this.obtenerCategorias();
+    });
   }
   
 
